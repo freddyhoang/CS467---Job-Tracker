@@ -1,0 +1,33 @@
+const apiUrl = ''
+
+export async function getSummary() {
+    let endpoint = apiUrl + ""
+    
+    try{
+        const response = await fetch(endpoint);
+        return await response.json();
+    }catch(error) {
+        return [];
+    }
+    
+}
+
+export async function createJob(data) {
+    let endpoint = apiUrl + ""
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+      })
+    return await response.json();
+}
+
+export async function createContact(data) {
+    let endpoint = apiUrl + ""
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+      })
+    return await response.json();
+}
