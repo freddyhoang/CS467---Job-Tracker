@@ -1,16 +1,4 @@
-const apiUrl = ''
-
-export async function getSummary() {
-    let endpoint = apiUrl + ""
-    
-    try{
-        const response = await fetch(endpoint);
-        return await response.json();
-    }catch(error) {
-        return [];
-    }
-    
-}
+const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com'
 
 export async function createJob(data) {
     let endpoint = apiUrl + ""

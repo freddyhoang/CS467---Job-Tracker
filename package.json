@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:3000, unified-surfer-339517.uw.r.appspot.com",
   "eslintConfig": {
     "extends": [
       "react-app",
