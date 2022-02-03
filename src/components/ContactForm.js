@@ -10,10 +10,26 @@ class ContactForm extends Component{
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
+  
+
+  async createContact(data) {
+    const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
+    let endpoint = apiUrl + "";
+
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+      })
+    return await response.json();
+}
+
   // Form submitting logic, prevent default page refresh 
   handleSubmit(event){
     const { email, name, company, position, phone } = this.state;
-    console.log(email);
+    // console.log(email);
+    let requestData = {"email": email, "name": name, "company": company};
+    this.createContact(requestData);
     event.preventDefault();
     // alert(`
     //   ____Your Details____\n

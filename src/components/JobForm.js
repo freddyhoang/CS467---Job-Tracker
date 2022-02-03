@@ -1,6 +1,5 @@
 import React,{ Component } from 'react'
 import Button from 'react-bootstrap/Button';
-import { createJob } from "../services/serviceProvider";
 
 class JobForm extends React.Component{
   constructor(props){
@@ -10,11 +9,25 @@ class JobForm extends React.Component{
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
-  // Form submitting logic, prevent default page refresh 
+
+  async createJob(data) {
+    const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
+    let endpoint = apiUrl + ""
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+      })
+    console.log(await response.json());
+    return await response.json();
+  }
+
   handleSubmit(event){
-    // const { company, title, link, salary, application_date, 
-    // status, interview_date, address, skill } = this.state
+    const { company, title, link, salary, application_date, 
+    status, interview_date, address, skill } = this.state
+    
+    let requestContent = {"company": company, "job_title": title, "job_link": link}
+    this.createJob(requestContent);
 
     event.preventDefault()
     alert(`
