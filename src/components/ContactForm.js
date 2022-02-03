@@ -1,6 +1,5 @@
 import React,{ Component } from 'react'
 import Button from 'react-bootstrap/Button';
-import { createContact } from "../services/serviceProvider";
 
 class ContactForm extends Component{
   constructor(props){
@@ -9,8 +8,6 @@ class ContactForm extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  
 
   async createContact(data) {
     const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
@@ -27,35 +24,17 @@ class ContactForm extends Component{
   // Form submitting logic, prevent default page refresh 
   handleSubmit(event){
     const { email, name, company, position, phone } = this.state;
-    // console.log(email);
     let requestData = {"email": email, "name": name, "company": company};
     this.createContact(requestData);
     event.preventDefault();
-    // alert(`
-    //   ____Your Details____\n
-    //   Email : ${email}
-    //   Name : ${name}
-    //   Age : ${company}
-    //   Address : ${position}
-    //   Phone No : ${phone}
-    // `)
   }
   
-  // Method causes to store all the values of the 
-  // input field in react state single method handle 
-  // input changes of all the input field using ES6 
-  // javascript feature computed property names
   handleChange(event){
     this.setState({
-      // Computed property names
-      // keys of the objects are computed dynamically
       [event.target.name] : event.target.value
     })
   }
   
-  // Return a controlled form i.e. values of the 
-  // input field not stored in DOM values are exist 
-  // in react component itself as state
   render(){
     return(
       <form onSubmit={this.handleSubmit}>

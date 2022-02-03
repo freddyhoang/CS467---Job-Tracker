@@ -1,5 +1,6 @@
 import React,{ Component } from 'react'
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 class JobForm extends React.Component{
   constructor(props){
@@ -44,7 +45,8 @@ class JobForm extends React.Component{
   
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <Container>
+        <form onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor='company'>Company</label>
           <input 
@@ -112,6 +114,8 @@ class JobForm extends React.Component{
           <Button type="submit" variant="primary">Add job</Button>
         </div>
       </form>
+      </Container>
+      
     )
   }
 }

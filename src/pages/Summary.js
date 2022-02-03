@@ -1,5 +1,6 @@
-import Table from "../components/Table";
+import TableComponent from "../components/TableComponent";
 import React,{ useEffect, useState } from 'react'
+import Container from 'react-bootstrap/Container';
 
 const Summary = () => {
   const [TableData, setTableData] = useState([]);
@@ -25,10 +26,13 @@ const Summary = () => {
   }, []);
 
   return (
+    <Container>
       <div className="Summary">
         <h1>Summary page</h1>
-        <Table table={TableData}/>
+        <TableComponent table={TableData}/>
       </div>
+    </Container>
+
     )
   };
   
