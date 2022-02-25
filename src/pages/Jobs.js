@@ -1,17 +1,14 @@
-import Header from "../components/Header";
 import JobForm from "../components/JobForm";
 import Container from 'react-bootstrap/Container';
 
 const Jobs = () => {
-    // return <h1>Contact Messss</h1>;
     return (
       <Container>
         <div className = "Jobs">
-          <Header/>
+          <h2 className="text-center">Add jobs you've previously applied to here:</h2>
           <JobForm/>
         </div>
       </Container>
-
     )
   };
   

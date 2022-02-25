@@ -1,44 +1,41 @@
-import Container from 'react-bootstrap/Container';
-import Carousel from 'react-bootstrap/Carousel';
-import Image from 'react-bootstrap/Image'
+import { Container, Carousel, Image } from 'react-bootstrap';
 
 const Home = () => {
     return (
     <Container>
-      <Carousel>
+      <Carousel variant='light' id='carousel-inner'>
         <Carousel.Item>
           <Image
-            thumbnail = 'true'
+            fluid = 'true'
             className="d-block w-100"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.gethealthystayhealthy.com%2Fsites%2Fdefault%2Ffiles%2F2019-04%2Fsitting-behind-your-desk-bad-for-your-health.jpg&f=1&nofb=1"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapi.time.com%2Fwp-content%2Fuploads%2F2019%2F10%2Fmark-zuckerberg-pete-buttigieg.jpg&f=1&nofb=1"
             alt="First slide"
           />
           <Carousel.Caption>
-            <p>Applying to be a software engineer, and desiring to contemplate your life by staring at a screen all day?</p>
+            <p class="caption">Applying to be a software engineer, and desiring to contemplate your life by staring at a screen all day?</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Image
-            thumbnail = 'true'
+            fluid = 'true'
             className="d-block w-100"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdm0qx8t0i9gc9.cloudfront.net%2Fthumbnails%2Fvideo%2FVd3bj2jPe%2Fmale-scientist-conducting-research-in-chemical-lab-scientist-working-with-chemical-liquid-in-research-laboratory-scientist-filling-test-tubes-with-samples-in-laboratory-scientist-working-in-lab_bsribr_ol_thumbnail-1080_01.png&f=1&nofb=1"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Falis.alberta.ca%2Fmedia%2F697210%2Fastronomer.jpg&f=1&nofb=1"
             alt="Second slide"
           />
-
           <Carousel.Caption>
-            <p>Or... maybe you want to be in a cold laboratory all day and make things explode?</p>
+            <p class="caption">Or... maybe you want to be looking into the dark night?</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Image
-            thumbnail = 'true'
+            fluid = 'true'
             className="d-block w-100"
-            src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.brandgfx.com%2Fwp-content%2Fuploads%2F2013%2F03%2Fsirius.jpg&f=1&nofb=1"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.ffx.io%2Fimages%2F%24width_800%2C%24height_450%2Ft_crop_auto%2Fq_86%2Cf_auto%2Fdf0d2d1a8563fc5325dd7b280be9d44dce4a304f&f=1&nofb=1"
             alt="Third slide"
           />
 
           <Carousel.Caption>
-            <p>Or, you're a special case, and want to be a professional food eater? Doesn't matter! Store whatever you're looking for here!</p>
+            <p class="caption">Or, you're a special case, and want to be a professional food eater? Doesn't matter! Store whatever you're looking for here!</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

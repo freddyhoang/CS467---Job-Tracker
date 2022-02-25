@@ -1,92 +1,84 @@
-import React,{ Component } from 'react'
-import Button from 'react-bootstrap/Button';
+import React,{ Component} from 'react'
+import { Button, Container, Form} from 'react-bootstrap';
+
 
 class ContactForm extends Component{
-  constructor(props){
-    super(props);
-    this.state = { email:'',name:'', company:'', position:'',phone:''};
+  constructor(){
+    super();
+    this.myRef = React.createRef();
+    this.formInputs = ['email', 'name', 'company', 'position', 'phone'];
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  
   async createContact(data) {
-    const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
-    let endpoint = apiUrl + "";
+    // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
+    const apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
+    let endpoint = apiUrl + "/contacts";
 
-    const response = await fetch(endpoint, {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    try {
+      const response = await fetch(endpoint, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({user: data})
+        headers: myHeaders,
+        body: JSON.stringify(data)
       })
-    return await response.json();
-}
+      alert("You were able to add a contact!");
+      return await response.json();
+    } catch(error) {
+      alert("Something was wrong!");
+    }
+  }
 
-  // Form submitting logic, prevent default page refresh 
   handleSubmit(event){
-    const { email, name, company, position, phone } = this.state;
-    let requestData = {"email": email, "name": name, "company": company};
-    this.createContact(requestData);
+    const { email, name, company, position, phone_number } = this.state;
+    console.log(this.state);
+    this.createContact(this.state);
     event.preventDefault();
   }
   
   handleChange(event){
+    if (event.target.id === "phone") {
+      this.setState({
+        "phone_number" : event.target.value
+      })
+      return;
+    }
+
     this.setState({
-      [event.target.name] : event.target.value
+      [event.target.id] : event.target.value
     })
   }
-  
+
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input 
-            name='email'
-            placeholder='bob@gmail.com' 
-            value = {this.state.email}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='name'>Name</label>
-          <input
-            name='name' 
-            placeholder='Bob'
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='company'>Company</label>
-          <input
-            name='company' 
-            placeholder='McDonalds'
-            value={this.state.company}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='position'>Position</label>
-          <input
-            name='position' 
-            placeholder='Cook'
-            value={this.state.position}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='phone'>Phone Number</label>
-          <input
-            name='phone' 
-            placeholder='503-111-2222'
-            value={this.state.phone}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <Button type="submit" variant="primary">Add contact</Button>
-        </div>
-      </form>
+      
+      <Container>
+        <Form onSubmit={this.handleSubmit.bind(this)} role="form">
+          {this.formInputs.map(
+            (input) => (
+              <Form.Group className="mb-3" controlId={`${input}`}>
+                <Form.Label>{`${input}`.charAt(0).toUpperCase() + `${input}`.slice(1)}</Form.Label>
+                {input === "email"
+                ? <Form.Control type="email" placeholder={`Enter ${input}`} ref={this.myRef} onChange={this.handleChange.bind(this)}/>
+                : <Form.Control type="text" placeholder={`Enter ${input}`} ref={this.myRef} onChange={this.handleChange.bind(this)}/>
+                }
+              </Form.Group>
+            )
+          )}
+          <Form.Text>To respect the privacy of your contacts, we will not share ANY of this info with anyone.</Form.Text>
+
+          <div>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+
+        </Form>
+      </Container>
+      
     )
   }
 }
