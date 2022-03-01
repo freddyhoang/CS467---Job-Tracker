@@ -2,19 +2,33 @@ import React from 'react';
 import { Button, Container, DropdownButton, Dropdown, Form} from 'react-bootstrap';
 
 const JobRow = ({row}) => {
-    // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
     const apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
     
+    async function getJWT() {
+        try{
+          const response = await fetch(apiUrl, {
+            method: "GET"
+          });
+          
+          let data = await response.json();
+          return data['jwt'];
+          
+      } catch(error) {
+          return [];
+        }
+    }
+    
     async function jobAPIcall(id, data, callType) {
-        
+        let jwt = await getJWT();
         let endpoint = apiUrl + "/jobs/" + id;
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        
+        myHeaders.append('Authorization', 'Bearer ' + jwt);
         if (["GET", "DELETE"].includes(callType)){
             try{
                 const response = await fetch(endpoint, {
-                    method: callType
+                    method: callType,
+                    headers: myHeaders
                   });
                   
                 let responseData = await response.json();

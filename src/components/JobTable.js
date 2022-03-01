@@ -3,7 +3,6 @@ import JobRow from './JobRow';
 import { Container, Table } from 'react-bootstrap';
 
 const JobTable = ({table}) => {
-    // console.log(table.length);
     let rows = ['Company', 'Job', 'Application Date', 'Interview Date',
     'Salary', 'Address', 'Link', 'Skills', 'Status'];
 

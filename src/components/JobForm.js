@@ -8,20 +8,34 @@ class JobForm extends Component{
     this.skillsList = ['Skill 1', 'Skill 2', 'Skill 3', 'Skill 4'];
     this.skills = ['C++', 'Javascript', 'Python', 'Flask', 'Django', 'SQL', 'GCP', 'Kubernetes', 'React', 'Docker'];
     this.state = { skill: []};
-    
+    this.apiUrl = "https://jobtracker-341220.uw.r.appspot.com";
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  async getJWT() {
+    try{
+      const response = await fetch(this.apiUrl, {
+        method: "GET"
+      });
+      
+      let data = await response.json();
+      return data['jwt'];
+      
+  } catch(error) {
+      return [];
+    }
+  }
+
   async createJob(data) {
     try{
-      // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
-      const apiUrl = "https://jobtracker-341220.uw.r.appspot.com";
-      let endpoint = apiUrl + "/jobs";
+      let endpoint = this.apiUrl + "/jobs";
+      let jwt = await this.getJWT();
       
       const myHeaders = new Headers();
       myHeaders.append('Content-Type', 'application/json');
-  
+      myHeaders.append('Authorization', 'Bearer ' + jwt);
       const response = await fetch(endpoint, {
           method: 'POST',
           headers: myHeaders,

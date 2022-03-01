@@ -2,12 +2,28 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 const ContactRow = ({row}) => {
     const apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
-    // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
-    
+
+    async function getJWT() {
+        try{
+          const response = await fetch(apiUrl, {
+            method: "GET"
+          });
+          
+          let data = await response.json();
+          return data['jwt'];
+          
+      } catch(error) {
+          return [];
+        }
+    }
+
     async function deleteJob(id) {
+        let jwt = await getJWT();
         let endpoint = apiUrl + "/contacts/" + id;
+        
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Authorization', 'Bearer ' + jwt);
 
         try{
             const response = await fetch(endpoint, {
@@ -33,7 +49,6 @@ const ContactRow = ({row}) => {
         <tr>
             {keys.map(
                 (k) => (
-                    // <th id={row.id+"_"+k}>{row[k]}</th>
                     <th>{row[k]}</th>
                 )
             )}

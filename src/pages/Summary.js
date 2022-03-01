@@ -6,14 +6,32 @@ import {Card, Container } from 'react-bootstrap';
 const Summary = () => {
   const [JobData, setJobData] = useState([]);
   const [ContactData, setContactData] = useState([]);
-  // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
   const apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
+
+  async function getJWT() {
+    try{
+      const response = await fetch(apiUrl, {
+        method: "GET"
+      });
+      
+      let data = await response.json();
+      return data['jwt'];
+      
+  } catch(error) {
+      return [];
+    }
+  }
 
   async function getAll(item) {
     let endpoint = apiUrl + "/" + item;
-    
+    let jwt = await getJWT();
+
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + jwt);
+
     try{
         const response = await fetch(endpoint, {
+          headers: myHeaders,
           method: "GET"
         });
         

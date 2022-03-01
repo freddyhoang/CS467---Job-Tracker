@@ -9,16 +9,30 @@ class ContactForm extends Component{
     this.formInputs = ['email', 'name', 'company', 'position', 'phone'];
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
   }
 
-  
-  async createContact(data) {
-    // const apiUrl = 'https://unified-surfer-339517.uw.r.appspot.com';
-    const apiUrl = 'https://jobtracker-341220.uw.r.appspot.com';
-    let endpoint = apiUrl + "/contacts";
+  async getJWT() {
+    try{
+      const response = await fetch(this.apiUrl, {
+        method: "GET"
+      });
+      
+      let data = await response.json();
+      return data['jwt'];
+      
+  } catch(error) {
+      return [];
+    }
+  }
 
+  async createContact(data) {
+    let endpoint = this.apiUrl + "/contacts";
+    let jwt = await this.getJWT();
+    
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', 'Bearer ' + jwt);
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
