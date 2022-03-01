@@ -23,7 +23,6 @@ async function getTime() {
   }
 }
 
-
 function Layout() {
   let isLoggedIn = getTime().then( (i) => {return i} );
   console.log(isLoggedIn);
@@ -37,8 +36,9 @@ function Layout() {
             <Nav.Link href="jobs">Add Job</Nav.Link>
             <Nav.Link href="contacts">Add Contact</Nav.Link>
             <Nav.Link href="summary">Summary</Nav.Link>
-            {!isLoggedIn ? <Nav.Link href="https://jobtracker-341220.uw.r.appspot.com/oauth"> Signup / Login </Nav.Link>
-            : <Nav.Link href="https://www.google.com/accounts/Logout" > Logout</Nav.Link>}
+            <Nav.Link href="https://jobtracker-341220.uw.r.appspot.com/oauth"> 
+              {!isLoggedIn ? <div>Signup / Login</div> : <div>Logout</div>} 
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
